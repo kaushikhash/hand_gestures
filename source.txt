@@ -1,0 +1,2 @@
+Got the code and explanation from here ----> https://gogul.dev/software/hand-gesture-recognition-p1#executing-code
+PART 2 --> https://gogul.dev/software/hand-gesture-recognition-p2
