@@ -1,19 +1,12 @@
-#------------------------------------------------------------
-# SEGMENT, RECOGNIZE and COUNT fingers from a video sequence
-#------------------------------------------------------------
 
-# organize imports
 import cv2
 import imutils
 import numpy as np
 from sklearn.metrics import pairwise
 
-# global variables
+
 bg = None
 
-#--------------------------------------------------
-# To find the running average over the background
-#--------------------------------------------------
 def run_avg(image, accumWeight):
     global bg
     # initialize the background
@@ -24,9 +17,7 @@ def run_avg(image, accumWeight):
     # compute weighted average, accumulate it and update the background
     cv2.accumulateWeighted(image, bg, accumWeight)
 
-#---------------------------------------------
-# To segment the region of hand in the image
-#---------------------------------------------
+
 def segment(image, threshold=25):
     global bg
     # find the absolute difference between background and current frame
@@ -46,9 +37,7 @@ def segment(image, threshold=25):
         segmented = max(cnts, key=cv2.contourArea)
         return (thresholded, segmented)
 
-#--------------------------------------------------------------
-# To count the number of fingers in the segmented hand region
-#--------------------------------------------------------------
+
 def count(thresholded, segmented):
     # find the convex hull of the segmented hand region
     chull = cv2.convexHull(segmented)
@@ -104,10 +93,6 @@ def count(thresholded, segmented):
             count += 1
 
     return count
-
-#-----------------
-# MAIN FUNCTION
-#-----------------
 if __name__ == "__main__":
     # initialize accumulated weight
     accumWeight = 0.5
